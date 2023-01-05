@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-ruby 3.1.3p185
+** ruby 3.1.3p185
 
 * Rails version
 Rails 7.0.4
