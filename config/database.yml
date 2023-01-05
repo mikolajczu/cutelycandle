@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: cutelycandle_development
+  host: localhost
+  port: 5432
+  user: testuser
+  password: testuser
+
+test:
+  <<: *default
+  database: cutelycandle_test
+  host: localhost
+  port: 5432
+  user: testuser
+  password: testuser
+
+production:
+  <<: *default
+  url: <%= ENV['MY_APP_DATABASE_URL'] %>
+  # database: cutelycandle_production
+  # username: cutelycandle
+  # password: <%= ENV["CUTELYCANDLE_DATABASE_PASSWORD"] %>
