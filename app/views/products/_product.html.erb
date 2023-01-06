@@ -6,13 +6,19 @@
 
   <p>
     <strong>Price:</strong>
-    <%= product.price %>
+    <%= number_to_currency(product.price/100, :unit => "zł", :format => "%n %u") %>
   </p>
 
   <p>
+    <strong>Categories</strong>
     <% product.categories.each do |p| %>
       <%= p.name + " " %>
     <% end %>
+  </p>
+
+  <p>
+    <strong>Sales count</strong>
+    <%= product.sales_count %>
   </p>
 
   <p>
