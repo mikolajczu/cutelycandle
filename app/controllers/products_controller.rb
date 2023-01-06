@@ -2,14 +2,14 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def add_to_cart
-    id = params[:id].to_i
-    session[:cart] << id unless session[:cart].include?(id)
-    redirect_to products_path
-  end
-
-  def remove_from_cart
-    id = params[:id].to_i
-    session[:cart].delete(id)
+    @product = Product.find_by(id: params[:id])
+    @cart_item = CartItem.find_or_create_by(product: @product)
+    if @cart_item.quantity == nil
+      @cart_item.quantity = 0
+    end
+    @cart_item.quantity += 1
+    @cart_item.save
+    session[:cart] << @cart_item.id unless session[:cart].include?(@cart_item)
     redirect_to products_path
   end
 

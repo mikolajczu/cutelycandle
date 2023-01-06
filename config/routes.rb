@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get "cancel", to: "checkout#cancel"
   post "products/add_to_cart/:id", to: "products#add_to_cart", as: "add_to_cart"
   delete "products/remove_from_cart/:id", to: "products#remove_from_cart", as: "remove_from_cart"
-  post "checkout/shoppingcart"
+  post "checkout/shoppingcart", to: "checkout#shoppingcart"
+  get "checkout/shoppingcart", to: "checkout#shoppingcart"
+  post "checkout/clear", to: "checkout#clear"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

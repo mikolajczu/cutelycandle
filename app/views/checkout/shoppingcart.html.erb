@@ -1,9 +1,11 @@
 <h1>Shopping cart</h1>
-<% @cart.each do |product| %>
-    <%= product.name %>
+<% @cart.each do |cart_item| %>
+    <%= cart_item.product.name %>
+    <%= cart_item.quantity %>
     <br>
 <% end %>
 <% if @cart.present? %>
     <%= @cart.collect { |item| item.to_builder.attributes! } %>
     <%= button_to "Buy now!", checkout_create_path, remote: true, data: { turbo: false, disable_with: "validating..."} %>
+    <%= button_to "Clear", checkout_clear_path, remote: true, data: { turbo: false, disable_with: "validating..."} %>
 <% end %>
