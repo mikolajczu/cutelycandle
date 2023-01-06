@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
-  has_many :product_categories
-  has_many :categories, through :product_categories
 
   # GET /products or /products.json
   def index
