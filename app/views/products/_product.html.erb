@@ -9,4 +9,10 @@
     <%= product.price %>
   </p>
 
+  <p>
+    <% product.categories.each do |p| %>
+      <%= p.name + " " %>
+    <% end %>
+  </p>
+
 </div>

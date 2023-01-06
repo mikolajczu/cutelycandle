@@ -21,7 +21,8 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    @product = Product.new(product_params)
+    @product = Product.new(product_params.except(:categories))
+    create_or_delete_products_categories(@product, params[:product][:categories])
 
     respond_to do |format|
       if @product.save
@@ -36,6 +37,8 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    create_or_delete_products_categories(@product, params[:product][:categories])
+
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
@@ -58,6 +61,15 @@ class ProductsController < ApplicationController
   end
 
   private
+
+    def create_or_delete_products_categories(product, categories)
+      product.categories.destroy_all
+      categories = categories.strip.split(',')
+      categories.each do |cat|
+        product.categories << Category.find_or_create_by(name: cat)
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
@@ -65,6 +77,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :price)
+      params.require(:product).permit(:name, :price, :categories)
     end
 end
