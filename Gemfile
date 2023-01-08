@@ -50,6 +50,10 @@ gem "bootsnap", require: false
 
 gem 'devise'
 
+gem "omniauth-rails_csrf_protection"
+gem 'omniauth-google-oauth2'
+gem 'dotenv-rails'
+
 gem 'stripe'
 
 group :development, :test do
