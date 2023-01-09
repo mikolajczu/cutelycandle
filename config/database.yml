@@ -8,16 +8,16 @@ development:
   database: cutelycandle_development
   host: localhost
   port: 5432
-  user: testuser
-  password: testuser
+  user: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 test:
   <<: *default
   database: cutelycandle_test
   host: localhost
   port: 5432
-  user: testuser
-  password: testuser
+  user: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
 production:
   <<: *default
